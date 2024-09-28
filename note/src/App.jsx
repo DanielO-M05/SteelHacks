@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [response, setResponse] = useState('');
   const [input, setInput] = useState('');
+  const [name, setName] = useState('');
   const [ws, setWs] = useState(null);
 
 
@@ -50,12 +51,18 @@ function App() {
     <>
       <div>
         <h1>Note Sharing App</h1>
+        <input 
+          value={name}
+          onChange={(e) => setName(e.target.value)} 
+          placeholder="Name"
+        />
         <textarea 
-          value={input}         // Set input value from state
-          onChange={(e) => setInput(e.target.value)} // Update state on input change
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button onClick = {handleClear}>Add Sticky</button>
         <p>You inputted: {input}</p>
+        <p>Your name is: {name}</p>
         <br></br>
         <br></br>
         <br></br>
