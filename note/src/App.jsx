@@ -52,11 +52,18 @@ function App() {
     };
 
     const createNote = () => {
-        if (input.trim() !== '') {
-            const newNote = { name, text: input };
-            setNotes([...notes, newNote]);
-            setInput('');
+        let name_input = window.prompt("What's yo name");
+        if (name_input != null) {
+            if (input.trim() !== '') {
+                setName(name_input);
+                const newNote = { name, text: input };
+                setNotes([...notes, newNote]);
+                setInput('');
+            }
+        } else {
+            window.prompt("Must provide name to continue");
         }
+
     };
 
     const handleInput = () => {
@@ -67,11 +74,11 @@ function App() {
         <>
           <div>
               <h1>Note Sharing App</h1>
-              <input
+              {/* <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
-              />
+              /> */}
               <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
