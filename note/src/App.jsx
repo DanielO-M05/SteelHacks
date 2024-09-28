@@ -5,6 +5,7 @@ function App() {
   const [input, setInput] = useState('');
   const [ws, setWs] = useState(null);
 
+
   useEffect(() => {
     // Create WebSocket connection
     const socket = new WebSocket('ws://localhost:3000');
@@ -37,6 +38,10 @@ function App() {
     }
   };
 
+  const handleClear = () => {
+    setInput("");
+  }
+
   const handleInput = () => {
     console.log("yippee");
   }
@@ -49,7 +54,7 @@ function App() {
           value={input}         // Set input value from state
           onChange={(e) => setInput(e.target.value)} // Update state on input change
         />
-        <button onClick = {handleInput()}>Submit</button>
+        <button onClick = {handleClear}>Add Sticky</button>
         <p>You inputted: {input}</p>
         <br></br>
         <br></br>
