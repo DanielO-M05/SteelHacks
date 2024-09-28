@@ -1,0 +1,24 @@
+# Ignore environment files
+.env
+.env.* # For other .env variants like .env.local, .env.production, etc.
+
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+dist/
+build/
+
+# Editor and OS specific files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Test coverage directory
+coverage/
