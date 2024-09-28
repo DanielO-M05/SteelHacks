@@ -77,7 +77,6 @@ function App() {
                   onChange={(e) => setInput(e.target.value)}
               />
               <button onClick={createNote}>Add Sticky</button>
-              <p>You inputted: {input}</p>
               <p>Your name is: {name}</p>
               <p>Output is: {summary}</p>
               <br></br>
