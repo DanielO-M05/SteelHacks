@@ -53,9 +53,10 @@ function App() {
 
     const createNote = () => {
         if (input.trim() !== '') {
-            const newNote = {text: input};
+            const newNote = { name, text: input };
             setNotes([...notes, newNote]);
             setInput('');
+            setName('');
         }
     };
 
@@ -89,7 +90,7 @@ function App() {
               <h2>Your Notes</h2>
               {notes.map((note, index) => (
                   <div key={index} className="note">
-                      {note.text}
+                      <strong>{note.name}:</strong> {note.text}
                   </div>
               ))}
           </div>
