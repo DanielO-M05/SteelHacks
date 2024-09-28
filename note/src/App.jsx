@@ -9,6 +9,7 @@ function App() {
   const [name, setName] = useState('');
   const [ws, setWs] = useState(null);
   const [summary, setSummary] = useState('');
+  const [notes, setNotes] = useState([]);
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -50,10 +51,13 @@ function App() {
         }
     };
 
-    const handleClear = () => {
-        // Save old input to notes
-        setInput("");
-    }
+    const createNote = () => {
+        if (input.trim() !== '') {
+            const newNote = {text: input};
+            setNotes([...notes, newNote]);
+            setInput('');
+        }
+    };
 
     const handleInput = () => {
         console.log("yippee");
@@ -72,7 +76,7 @@ function App() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button onClick={handleClear}>Add Sticky</button>
+                <button onClick={createNote}>Add Sticky</button>
                 <p>You inputted: {input}</p>
                 <p>Your name is: {name}</p>
                 <p>Output is {summary}</p>
@@ -81,6 +85,14 @@ function App() {
                 <br></br>
                 {/* <button onClick={sendMessage}>Send Message to Server</button>
         <p>Response from server: {response}</p> */}
+            </div>
+            <div>
+                <h2>Your Notes</h2>
+                {notes.map((note, index) => (
+                    <div key={index} style={{border: '1px solid black', padding: '10px', margin: '10px 0'}}>
+                        {note.text}
+                    </div>
+                ))}
             </div>
         </>
     );
