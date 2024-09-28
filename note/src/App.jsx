@@ -10,6 +10,12 @@ function App() {
   const [ws, setWs] = useState(null);
   const [summary, setSummary] = useState('');
 
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  const prompt = "Write a story about a magic backpack.";
+  setSummary = model.generateContent(prompt);
+
 
 
     useEffect(() => {
