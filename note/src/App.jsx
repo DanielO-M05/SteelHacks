@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [response, setResponse] = useState('');
+  const [input, setInput] = useState('');
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
@@ -44,8 +45,13 @@ function App() {
     <>
       <div>
         <h1>Note Sharing App</h1>
-        <input style={{ marginLeft: '100px' }}></input>
+        <input 
+          style={{ marginLeft: '100px' }} 
+          value={input}         // Set input value from state
+          onChange={(e) => setInput(e.target.value)} // Update state on input change
+        />
         <button onClick = {handleInput()}>Submit</button>
+        <p>You inputted: {input}</p>
         <br></br>
         <br></br>
         <br></br>
