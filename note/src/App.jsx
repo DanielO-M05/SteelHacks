@@ -46,7 +46,8 @@ function App() {
     <>
       <div>
         <h1>Note Sharing App</h1>
-        <input value={input}
+        <input 
+          value={name}
           onChange={(e) => setName(e.target.value)} 
           placeholder="Name"
         />
