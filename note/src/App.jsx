@@ -4,20 +4,12 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 
 function App() {
-<<<<<<< HEAD
-    const [response, setResponse] = useState('');
-    const [input, setInput] = useState('');
-    const [name, setName] = useState('');
-    const [ws, setWs] = useState(null);
-    const [summary, setSummary] = useState('');
-=======
   const [response, setResponse] = useState('');
   const [input, setInput] = useState('');
   const [name, setName] = useState('');
   const [ws, setWs] = useState(null);
   const [summary, setSummary] = useState('');
 
->>>>>>> 922e0d96bebbe1175112c3c2dba1bff82292e186
 
 
     useEffect(() => {
@@ -57,7 +49,6 @@ function App() {
         setInput("");
     }
 
-<<<<<<< HEAD
     const handleInput = () => {
         console.log("yippee");
     }
@@ -87,42 +78,6 @@ function App() {
             </div>
         </>
     );
-=======
-  const handleClear = () => {
-    // Save old input to notes
-    setInput("");
-  }
-
-  const handleInput = () => {
-    console.log("yippee");
-  }
-
-  return (
-    <>
-      <div>
-        <h1>Note Sharing App</h1>
-        <input 
-          value={name}
-          onChange={(e) => setName(e.target.value)} 
-          placeholder="Name"
-        />
-        <textarea 
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button onClick = {handleClear}>Add Sticky</button>
-        <p>You inputted: {input}</p>
-        <p>Your name is: {name}</p>
-        <p>Output is: {summary}</p>
-        <br></br>
-        <br></br>
-        <br></br>
-        {/* <button onClick={sendMessage}>Send Message to Server</button>
-        <p>Response from server: {response}</p> */}
-      </div>
-    </>
-  );
->>>>>>> 922e0d96bebbe1175112c3c2dba1bff82292e186
 }
 
 export default App;
