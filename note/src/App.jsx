@@ -44,7 +44,7 @@ function App() {
     <>
       <div>
         <h1>Note Sharing App</h1>
-        <input></input>
+        <input style={{ marginLeft: '100px' }}></input>
         <button onClick = {handleInput()}>Submit</button>
         <br></br>
         <br></br>
