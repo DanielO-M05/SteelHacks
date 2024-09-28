@@ -79,7 +79,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>WebSocket with Vite + React using ws</h1>
+        <h1>Note Sharing App</h1>
         <button onClick={sendMessage}>Send Message to Server</button>
         <p>Response from server: {response}</p>
       </div>
