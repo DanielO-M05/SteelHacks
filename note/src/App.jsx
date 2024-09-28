@@ -72,12 +72,22 @@ function App() {
     }
   };
 
+  const handleInput = () => {
+    console.log("yippe");
+  }
+
   return (
+    <>
     <div>
-      <h1>WebSocket with Vite + React using ws</h1>
-      <button onClick={sendMessage}>Send Message to Server</button>
-      <p>Response from server: {response}</p>
-    </div>
+        <h1>WebSocket with Vite + React using ws</h1>
+        <button onClick={sendMessage}>Send Message to Server</button>
+        <p>Response from server: {response}</p>
+      </div>
+      <div>
+        <input></input>
+        <button onClick = {handleInput()}>Submit</button>
+      </div>
+    </>
   );
 }
 
