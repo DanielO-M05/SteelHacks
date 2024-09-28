@@ -11,13 +11,12 @@ function App() {
   const [summary, setSummary] = useState('');
   const [notes, setNotes] = useState([]);
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-  console.log(import.meta.env.VITE_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+//   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);  const key = import.meta.env.VITE_API_KEY;
+//   console.log("key = " + key);
+//   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  const prompt = "Write a story about a magic backpack.";
-  // setSummary = model.generateContent(prompt);
-
+//   const prompt = "Write a story about a magic backpack.";
+//   setSummary(model.generateContent(prompt));
 
 
     useEffect(() => {
