@@ -82,11 +82,11 @@ function App() {
         <h1>Note Sharing App</h1>
         <input></input>
         <button onClick = {handleInput()}>Submit</button>
+        <br></br>
+        <br></br>
+        <br></br>
         <button onClick={sendMessage}>Send Message to Server</button>
         <p>Response from server: {response}</p>
-      </div>
-      <div>
-
       </div>
     </>
   );
