@@ -44,6 +44,7 @@ function App() {
     const [input, setInput] = useState('');
     const [name, setName] = useState('');
     const [ws, setWs] = useState(null);
+    const [summary, setSummary] = useState('');
 
 
     useEffect(() => {
@@ -79,6 +80,7 @@ function App() {
     };
 
     const handleClear = () => {
+        // Save old input to notes
         setInput("");
     }
 
@@ -102,6 +104,7 @@ function App() {
                 <button onClick={handleClear}>Add Sticky</button>
                 <p>You inputted: {input}</p>
                 <p>Your name is: {name}</p>
+                <p>Output is {summary}</p>
                 <br></br>
                 <br></br>
                 <br></br>
