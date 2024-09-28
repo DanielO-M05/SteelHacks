@@ -65,7 +65,7 @@ function App() {
         <button onClick = {handleClear}>Add Sticky</button>
         <p>You inputted: {input}</p>
         <p>Your name is: {name}</p>
-        <p>Output is {summary}</p>
+        <p>Output is: {summary}</p>
         <br></br>
         <br></br>
         <br></br>
