@@ -56,7 +56,6 @@ function App() {
             const newNote = { name, text: input };
             setNotes([...notes, newNote]);
             setInput('');
-            setName('');
         }
     };
 
