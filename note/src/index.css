@@ -87,7 +87,6 @@ button {
 }
 
 button:hover {
-  background-color: #323232;
   border-color: #646cff;
 }
 
@@ -101,7 +100,7 @@ button:focus {
   padding: 15px;
   margin: 10px 0;
   width: 100%;
-  max-width: 500px;
+  max-width: 300px;
   border-radius: 8px;
   transition: background-color 0.25s, box-shadow 0.25s;
 }
