@@ -73,7 +73,7 @@ function App() {
   };
 
   const handleInput = () => {
-    console.log("yippe");
+    console.log("yippee");
   }
 
   return (
