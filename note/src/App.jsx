@@ -46,7 +46,7 @@ function App() {
       <div>
         <h1>Note Sharing App</h1>
         <input 
-          style={{ marginLeft: '100px' }} 
+          // style={{ marginLeft: '100px' }} 
           value={input}         // Set input value from state
           onChange={(e) => setInput(e.target.value)} // Update state on input change
         />
