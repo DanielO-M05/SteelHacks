@@ -45,7 +45,7 @@ function App() {
     <>
       <div>
         <h1>Note Sharing App</h1>
-        <input 
+        <textarea 
           value={input}         // Set input value from state
           onChange={(e) => setInput(e.target.value)} // Update state on input change
         />
