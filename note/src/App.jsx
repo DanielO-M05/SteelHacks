@@ -77,7 +77,6 @@ function App() {
                   onChange={(e) => setInput(e.target.value)}
               />
               <button onClick={createNote}>Add Sticky</button>
-              <p>You inputted: {input}</p>
               <p>Your name is: {name}</p>
               <p>Output is: {summary}</p>
               <br></br>
@@ -89,7 +88,7 @@ function App() {
           <div>
               <h2>Your Notes</h2>
               {notes.map((note, index) => (
-                  <div key={index} style={{border: '1px solid black', padding: '10px', margin: '10px 0'}}>
+                  <div key={index} className="note">
                       {note.text}
                   </div>
               ))}
