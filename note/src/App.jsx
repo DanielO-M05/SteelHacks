@@ -49,8 +49,8 @@ function App() {
         <br></br>
         <br></br>
         <br></br>
-        <button onClick={sendMessage}>Send Message to Server</button>
-        <p>Response from server: {response}</p>
+        {/* <button onClick={sendMessage}>Send Message to Server</button>
+        <p>Response from server: {response}</p> */}
       </div>
     </>
   );
