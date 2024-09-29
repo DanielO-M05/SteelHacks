@@ -13,7 +13,8 @@ function App() {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = "Can you summarize these notes: ";
+    const prompt = "Can you summarize these notes:";
+ 
 
     useEffect(() => {
         // Create WebSocket connection
@@ -61,33 +62,43 @@ function App() {
         }
     };
 
-    const createNote = async () => {
+    const createNote = () => {
         if (input.trim() !== '') {
             const newNote = { name, text: input };
             setNotes([...notes, newNote]);
             setInput('');
         }
 
-        try {
-            // Wait for the content to be generated
-            const result = await model.generateContent(prompt);
-            
-            // Optionally, you can also set it in your state
-            setSummary(result.response.text());
-        } catch (error) {
-            console.error("Error generating content:", error);
-        }
+        console.log("summary: " + model.generateContent(prompt));
+
     };
 
     // Function to export notes as a PDF
     const exportToPDF = () => {
         const doc = new jsPDF();
+        const pageHeight = doc.internal.pageSize.height;  // Get the height of the page
+        let yOffset = 20;  // Start position for text
+
         doc.setFontSize(16);
         doc.text('Sticky Notes:', 10, 10);  // Add a title to the PDF
 
         notes.forEach((note, index) => {
             const noteText = `${note.name}: ${note.text}`;
-            doc.text(noteText, 10, 20 + index * 10);  // Add each note to the PDF
+
+            // Split long text into multiple lines
+            const splitText = doc.splitTextToSize(noteText, 180);  // 180 is the line width
+
+            // Check each line of text and handle page overflow
+            splitText.forEach((line, lineIndex) => {
+                if (yOffset + 10 > pageHeight) {  // If the next line would go out of bounds
+                    doc.addPage();  // Add a new page
+                    yOffset = 20;  // Reset y position
+                }
+                doc.text(line, 10, yOffset);
+                yOffset += 10;  // Move to the next line position
+            });
+
+            yOffset += 10;  // Add space between notes
         });
 
         doc.save('notes.pdf');  // Save the PDF with a default file name
