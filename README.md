@@ -1,9 +1,5 @@
 # SteelHacks
 
-Test: D O-M
+Credits:
 
-Test: DG New
-
-Test: SP trust
-
-Test: Now
+The use of ChatGPT was used throughout this project to assist with various functionality.
