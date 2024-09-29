@@ -15,7 +15,7 @@ function App() {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = "Write a story about a magic backpack.";
-  setSummary(model.generateContent(prompt));
+  //setSummary(model.generateContent(prompt));
 
     useEffect(() => {
         // Create WebSocket connection
