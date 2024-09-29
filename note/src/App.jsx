@@ -135,7 +135,7 @@ function App() {
           <div>
               <h2>Your Notes</h2>
               {notes.map((note, index) => (
-                  <div key={index} className="note">
+                  <div key={index} className="note" style={{ wordBreak: 'break-word' }}>
                       <strong>{note.name}:</strong> {note.text}
                   </div>
               ))}
