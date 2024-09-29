@@ -13,6 +13,8 @@ function App() {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+    const prompt = "Can you summarize these notes: ";
+
     useEffect(() => {
         // Create WebSocket connection
         const socket = new WebSocket('ws://localhost:3000');
