@@ -96,28 +96,28 @@ function App() {
     const createNote = async () => {
         if (input.trim() !== '') {
             const newNote = { name, text: input };
-            let note_combo = "";
-            for (let i = 0; i < notes.length; i++) {
-                note_combo += "Note: "
-                note_combo += notes[i].text;
-                note_combo += " --- ";
-            }
-            console.log(note_combo);
-            console.log("prompt is: " + prompt + note_combo);
-            let temp_prompt = prompt + note_combo;
-
-            const result = await model.generateContent(temp_prompt);
-            console.log(result);
-
-            setSummary(result.response.text());
-            setNotes([...notes, newNote]);
             setInput('');
+
+            // Update notes and generate summary based on the updated notes
+            setNotes((prevNotes) => {
+                const updatedNotes = [...prevNotes, newNote]; // Create a new array with the new note
+
+                // Create the note combo for the prompt
+                const note_combo = updatedNotes.map(note => `Note: ${note.text} --- `).join('');
+                const temp_prompt = prompt + note_combo;
+
+                // Generate summary
+                model.generateContent(temp_prompt).then(result => {
+                    setSummary(result.response.text());
+                });
+
+                return updatedNotes; // Return the updated notes
+            });
 
             if (ws) {
                 ws.send(JSON.stringify(newNote));
             }
         }
-
     };
 
     // Function to export notes as a PDF
