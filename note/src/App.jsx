@@ -87,7 +87,9 @@ function App() {
         const pageHeight = doc.internal.pageSize.height;  // Get the height of the page
         let yOffset = 20;  // Start position for text
 
+        doc.setFont("Helvetica");
         doc.setFontSize(16);
+        doc.setTextColor(10);
         doc.text('Sticky Notes:', 10, 10);  // Add a title to the PDF
 
         notes.forEach((note, index) => {
