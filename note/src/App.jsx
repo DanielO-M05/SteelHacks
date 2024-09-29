@@ -1,6 +1,4 @@
-
-
-
+import ReactMarkdown from 'react-markdown'; // Import react-markdown
 import jsPDF from 'jspdf';
 import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -181,8 +179,11 @@ function App() {
               />
               <button onClick={createNote}>Add Sticky</button>
               <h3>Summary</h3>
-              {summary ? <p>{summary}</p> : <p>Nothing to Display</p>}              <br></br>
-              <br></br>
+              {summary ? (
+                    <ReactMarkdown>{summary}</ReactMarkdown> // Render Markdown here
+                ) : (
+                    <p>Nothing to Display</p>
+                )}
               <br></br>
               {/* <button onClick={sendMessage}>Send Message to Server</button>
       <p>Response from server: {response}</p> */}
