@@ -77,9 +77,6 @@ function App() {
             // Wait for the content to be generated
             const result = await model.generateContent(prompt);
             
-            // Access the text from the response
-            console.log(result.response.text());
-            
             // Optionally, you can also set it in your state
             setSummary(result.response.text());
         } catch (error) {
@@ -132,8 +129,8 @@ function App() {
                   onChange={(e) => setInput(e.target.value)}
               />
               <button onClick={createNote}>Add Sticky</button>
-              <h3>Summary</h3>
-              {summary ? <p>Output is: {summary}</p> : <p>Nothing to Display</p>}              <br></br>
+              <h2>Summary</h2>
+              {summary ? <p>{summary}</p> : <p>Nothing to Display</p>}
               <br></br>
               <br></br>
               {/* <button onClick={sendMessage}>Send Message to Server</button>
@@ -142,7 +139,7 @@ function App() {
           <div>
               <h2>Your Notes</h2>
               {notes.map((note, index) => (
-                  <div key={index} className="note">
+                  <div key={index} className="note" style={{ wordBreak: 'break-word' }}>
                       <strong>{note.name}:</strong> {note.text}
                   </div>
               ))}
