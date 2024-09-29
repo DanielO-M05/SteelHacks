@@ -72,6 +72,8 @@ function App() {
             setInput('');
         }
 
+        console.log("summary" + model.generateContent(prompt));
+
     };
 
     // Function to export notes as a PDF
