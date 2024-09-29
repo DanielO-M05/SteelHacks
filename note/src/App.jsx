@@ -65,7 +65,7 @@ function App() {
     const createNote = async () => {
         if (input.trim() !== '') {
             const newNote = { name, text: input };
-            const result = await model.generateContent(prompt + input);
+            const result = await model.generateContent(prompt);
             setSummary(result);
             console.log(text);
            // prompt = 
