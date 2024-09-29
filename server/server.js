@@ -1,4 +1,4 @@
-const WebSocket = require('ws');
+/*const WebSocket = require('ws');
 const http = require('http');
 
 const server = http.createServer();
@@ -33,7 +33,7 @@ wss.on('connection', (ws) => {
 server.listen(5173, () => {
     console.log('WebSocket server is listening on ws://localhost:5173');
 });
-
+*/
 
 // server.js
 /*const WebSocket = require('ws');
