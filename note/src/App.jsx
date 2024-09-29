@@ -1,6 +1,6 @@
+import jsPDF from 'jspdf';
 import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { defineConfig, loadEnv } from 'vite';
 
 function App() {
   const [response, setResponse] = useState('');
@@ -8,21 +8,7 @@ function App() {
   const [name, setName] = useState('');
   const [ws, setWs] = useState(null);
   const [summary, setSummary] = useState('');
-  const [notes, setNotes] = useState([]);
-
-  import { defineConfig, loadEnv } from 'vite'
-
-  export default defineConfig(({ command, mode }) => {
-      // Load env file based on `mode` in the current working directory.
-      // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-      const env = loadEnv(mode, process.cwd(), '')
-      return {
-          // vite config
-          define: {
-              __APP_ENV__: JSON.stringify(env.APP_ENV),
-          },
-      }
-  })
+    const [notes, setNotes] = useState([]);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   consolse.log(import.meta.env.VITE_API_KEY);
@@ -57,20 +43,6 @@ function App() {
         };
     }, []);
 
-    // // const isFirstRender = useFirstRender();
-    // const [isFirstRender, setFirstRender] = useState(true);
-
-    // useEffect(() => {
-    //     if (isFirstRender) {
-    //         let name_input = window.prompt("Enter a name");
-    //         while (name_input == null) {
-    //             name_input = window.prompt("Must enter a name to continue");
-    //         } 
-    //         setName(name_input);
-    //     } 
-    //     setFirstRender(false);
-    // }, [isFirstRender]);
-
     const hasPromptedRef = useRef(false); // Create a ref to track if the prompt has been shown
 
     useEffect(() => {
@@ -98,6 +70,20 @@ function App() {
             setInput('');
         }
 
+    };
+
+    // Function to export notes as a PDF
+    const exportToPDF = () => {
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text('Sticky Notes:', 10, 10);  // Add a title to the PDF
+
+        notes.forEach((note, index) => {
+            const noteText = `${note.name}: ${note.text}`;
+            doc.text(noteText, 10, 20 + index * 10);  // Add each note to the PDF
+        });
+
+        doc.save('notes.pdf');  // Save the PDF with a default file name
     };
 
     const handleInput = () => {
@@ -134,6 +120,9 @@ function App() {
                   </div>
               ))}
           </div>
+          <div>
+          <button onClick={exportToPDF}>Export Notes to PDF</button>
+        </div>
         </>
     );
 }
