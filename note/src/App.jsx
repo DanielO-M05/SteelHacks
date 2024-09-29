@@ -50,9 +50,7 @@ function App() {
     useEffect(() => {
         if (isFirstRender) {
             window.prompt("hi");
-        } else {
-            console.log("This is not the first render.");
-        }
+        } 
     }, [isFirstRender]);
 
     function useFirstRender() {
@@ -69,17 +67,11 @@ function App() {
     };
 
     const createNote = () => {
-        // let name_input = window.prompt("What's yo name");
-        // if (name_input != null) {
-            if (input.trim() !== '') {
-                setName(name_input);
-                const newNote = { name, text: input };
-                setNotes([...notes, newNote]);
-                setInput('');
-            }
-        // } else {
-        //     window.prompt("Must provide name to continue");
-        // }
+        if (input.trim() !== '') {
+            const newNote = { name, text: input };
+            setNotes([...notes, newNote]);
+            setInput('');
+        }
 
     };
 
