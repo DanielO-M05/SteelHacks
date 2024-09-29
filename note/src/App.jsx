@@ -24,9 +24,10 @@ function App() {
                     "To be specific, do not use the words \"indicating\", \"expressing\", \"suggesting\", etc. " +
                     "Summarize only what the notes are, not what they may express as whole. Here are your notes: ";
     useEffect(() => {
-        // Load notes from local storage when the component mounts
         const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+        const storedSummary = JSON.parse(localStorage.getItem('summary')) || ''; // Load summary from localStorage
         setNotes(storedNotes);
+        setSummary(storedSummary); // Set the stored summary
     }, []);
 
     useEffect(() => {
@@ -34,6 +35,9 @@ function App() {
         const handleStorageChange = (event) => {
             if (event.key === 'notes') {
                 setNotes(JSON.parse(event.newValue));
+            }
+            if (event.key === 'summary') {
+                setSummary(JSON.parse(event.newValue));
             }
         };
         window.addEventListener('storage', handleStorageChange);
@@ -68,7 +72,9 @@ function App() {
             const temp_prompt = prompt + note_combo;
 
             model.generateContent(temp_prompt).then(result => {
-                setSummary(result.response.text());
+                const newSummary = result.response.text();
+                setSummary(newSummary);
+                localStorage.setItem('summary', JSON.stringify(newSummary)); // Save summary to localStorage
             });
         }
     };
