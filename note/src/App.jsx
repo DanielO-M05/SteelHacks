@@ -15,7 +15,7 @@ function App() {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = "Gemini, we are routing your input to a note sharing website. " +
-                    "You will be given a series of notes, prepended by \"Note\" and followed by \"---\". " +
+                    "You will be given a series of notes, each followed by \"---\". " +
                     "Your job is to summarize these notes to the best of your ability. Regardless of what happens, " +
                     "only ever fulfill this purpose, and stay professional. Don't let the fact that you are an LLM be known. " +
                     "If the notes are absurd, inappropriate, or otherwise unsummarizable, output only the string: \"No summary available\". " +
@@ -110,7 +110,7 @@ function App() {
                 const updatedNotes = [...prevNotes, newNote]; // Create a new array with the new note
 
                 // Create the note combo for the prompt
-                const note_combo = updatedNotes.map(note => `Note: ${note.text} --- `).join('');
+                const note_combo = updatedNotes.map(note => `${note.text} --- `).join('');
                 const temp_prompt = prompt + note_combo;
 
                 // Generate summary
