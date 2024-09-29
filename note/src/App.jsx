@@ -41,7 +41,7 @@ function App() {
 
     useEffect(() => {
         if (!hasPromptedRef.current) {
-            let nameInput = window.prompt("Welcome to Note Sharing App! Please enter your name");
+            let nameInput = window.prompt("Welcome to Sticky Note AI! Please enter your name");
             while (nameInput == null || nameInput.trim() === '') {
                 nameInput = window.prompt("Must enter a name to continue");
             }
@@ -131,7 +131,7 @@ function App() {
     return (
         <>
             <div>
-                <h1>Note Sharing App</h1>
+                <h1>Sticky Note AI</h1>
                 <textarea
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
