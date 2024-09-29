@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 
@@ -45,6 +45,23 @@ function App() {
         };
     }, []);
 
+    const isFirstRender = useFirstRender();
+
+    useEffect(() => {
+        if (isFirstRender) {
+            window.prompt("hi");
+        } else {
+            console.log("This is not the first render.");
+        }
+    }, [isFirstRender]);
+
+    function useFirstRender() {
+        const ref = useRef(true);
+        const firstRender = ref.current;
+        ref.current = false;
+        return firstRender;
+    }
+
     const sendMessage = () => {
         if (ws) {
             ws.send('Hello from React!');
@@ -52,17 +69,17 @@ function App() {
     };
 
     const createNote = () => {
-        let name_input = window.prompt("What's yo name");
-        if (name_input != null) {
+        // let name_input = window.prompt("What's yo name");
+        // if (name_input != null) {
             if (input.trim() !== '') {
                 setName(name_input);
                 const newNote = { name, text: input };
                 setNotes([...notes, newNote]);
                 setInput('');
             }
-        } else {
-            window.prompt("Must provide name to continue");
-        }
+        // } else {
+        //     window.prompt("Must provide name to continue");
+        // }
 
     };
 
