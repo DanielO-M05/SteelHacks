@@ -44,26 +44,33 @@ function App() {
         };
     }, []);
 
-    // const isFirstRender = useFirstRender();
-    const [isFirstRender, setFirstRender] = useState(true);
+    // // const isFirstRender = useFirstRender();
+    // const [isFirstRender, setFirstRender] = useState(true);
+
+    // useEffect(() => {
+    //     if (isFirstRender) {
+    //         let name_input = window.prompt("Enter a name");
+    //         while (name_input == null) {
+    //             name_input = window.prompt("Must enter a name to continue");
+    //         } 
+    //         setName(name_input);
+    //     } 
+    //     setFirstRender(false);
+    // }, [isFirstRender]);
+
+    const hasPromptedRef = useRef(false); // Create a ref to track if the prompt has been shown
 
     useEffect(() => {
-        if (isFirstRender) {
-            let name_input = window.prompt("Enter a name");
-            while (name_input == null) {
-                name_input = window.prompt("Must enter a name to continue");
+        if (!hasPromptedRef.current) { // Check if the prompt has been shown
+            let nameInput = window.prompt("Enter a name");
+            while (nameInput == null || nameInput.trim() === '') { // Ensure input is valid
+                nameInput = window.prompt("Must enter a name to continue");
             } 
-            setName(name_input);
-        } 
-        setFirstRender(false);
-    }, [isFirstRender]);
+            setName(nameInput);
+            hasPromptedRef.current = true; // Mark that the prompt has been shown
+        }
+    }, []); // Empty dependency array to run only once
 
-    function useFirstRender() {
-        const ref = useRef(true);
-        const firstRender = ref.current;
-        ref.current = false;
-        return firstRender;
-    }
 
     const sendMessage = () => {
         if (ws) {
