@@ -101,11 +101,6 @@ function App() {
         <>
           <div>
               <h1>Note Sharing App</h1>
-              {/* <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Name"
-              /> */}
               <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
