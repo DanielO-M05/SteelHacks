@@ -3,11 +3,11 @@ import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 function App() {
-  const [response, setResponse] = useState('');
-  const [input, setInput] = useState('');
-  const [name, setName] = useState('');
-  const [ws, setWs] = useState(null);
-  const [summary, setSummary] = useState('');
+    const [response, setResponse] = useState('');
+    const [input, setInput] = useState('');
+    const [name, setName] = useState('');
+    const [ws, setWs] = useState(null);
+    const [summary, setSummary] = useState('');
     const [notes, setNotes] = useState([]);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
@@ -98,11 +98,6 @@ function App() {
         <>
           <div>
               <h1>Note Sharing App</h1>
-              {/* <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Name"
-              /> */}
               <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
