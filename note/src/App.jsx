@@ -11,7 +11,6 @@ function App() {
     const [notes, setNotes] = useState([]);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-  consolse.log(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = "Write a story about a magic backpack.";
