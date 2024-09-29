@@ -41,7 +41,7 @@ function App() {
 
     useEffect(() => {
         if (!hasPromptedRef.current) {
-            let nameInput = window.prompt("Enter a name");
+            let nameInput = window.prompt("Welcome to Note Sharing App! Please enter your name");
             while (nameInput == null || nameInput.trim() === '') {
                 nameInput = window.prompt("Must enter a name to continue");
             }
