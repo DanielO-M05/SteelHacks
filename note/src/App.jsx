@@ -36,7 +36,7 @@ function App() {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
-
+    
     const hasPromptedRef = useRef(false);
 
     useEffect(() => {
