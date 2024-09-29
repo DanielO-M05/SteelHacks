@@ -1,9 +1,10 @@
 # SteelHacks
 
-Test: D O-M
+Credits:
 
-Test: DG New
+The use of ChatGPT was used throughout this project to assist with various functionality.
 
-Test: SP trust
+How to run:
 
-Test: Now
+Enter note directory, then in terminal type ```npm run dev```
+On Vite Frontend, make sure to ```npm install react-markdown``` and ```npm install jspdf```

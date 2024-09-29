@@ -68,6 +68,11 @@ function App() {
         }
     };
 
+    const clearNotes = () => {
+        setNotes([]);
+        localStorage.removeItem('notes');
+    };
+
     const exportToPDF = () => {
         const doc = new jsPDF();
         const pageHeight = doc.internal.pageSize.height;
@@ -132,6 +137,7 @@ function App() {
                     onChange={(e) => setInput(e.target.value)}
                 />
                 <button onClick={createNote}>Add Sticky</button>
+                <button onClick={clearNotes}>Clear All Notes</button>
                 <h3>Summary</h3>
                 {summary ? (
                     <ReactMarkdown>{summary}</ReactMarkdown>
