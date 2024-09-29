@@ -65,7 +65,12 @@ function App() {
     const createNote = async () => {
         if (input.trim() !== '') {
             const newNote = { name, text: input };
-            const result = await model.generateContent(prompt + input);
+            let note_combo = "";
+            for (let i = 0; i < notes.length; i++) {
+                note_combo += notes[i];
+                note_combo += " --- ";
+            }
+            const result = await model.generateContent(prompt + note_combo);
             setSummary(result);
             console.log(text);
            // prompt = 
@@ -76,6 +81,9 @@ function App() {
         try {
             // Wait for the content to be generated
             const result = await model.generateContent(prompt);
+            
+            // Access the text from the response
+            console.log(result.response.text());
             
             // Optionally, you can also set it in your state
             setSummary(result.response.text());
@@ -89,38 +97,22 @@ function App() {
     const exportToPDF = () => {
         const doc = new jsPDF();
         const pageHeight = doc.internal.pageSize.height;  // Get the height of the page
-        let yOffset = 20;  // Initial y-offset position
+        let yOffset = 20;  // Start position for text
 
         doc.setFontSize(16);
+        doc.text('Sticky Notes:', 10, 10);  // Add a title to the PDF
 
-        // Include the summary at the top
-        doc.text('Summary:', 10, 10);
-        const summaryText = summary || "";  // Ensure `summary` is defined
-        const splitSummary = doc.splitTextToSize(summaryText, 180);  // Wrap summary text if too long
-
-        splitSummary.forEach((line) => {
-            if (yOffset + 10 > pageHeight) {  // Check if the text would overflow
-                doc.addPage();
-                yOffset = 20;  // Reset y position on new page
-            }
-            doc.text(line, 10, yOffset);  // Print each line of the summary
-            yOffset += 10;
-        });
-
-        yOffset += 10;  // Add space after the summary
-
-        doc.text('Sticky Notes:', 10, yOffset);  // Add a title for the notes
-        yOffset += 10;
-
-        // Include all notes in the PDF
         notes.forEach((note, index) => {
             const noteText = `${note.name}: ${note.text}`;
-            const splitText = doc.splitTextToSize(noteText, 180);  // Wrap note text
 
-            splitText.forEach((line) => {
-                if (yOffset + 10 > pageHeight) {  // Check for page overflow
-                    doc.addPage();
-                    yOffset = 20;  // Reset y position on new page
+            // Split long text into multiple lines
+            const splitText = doc.splitTextToSize(noteText, 180);  // 180 is the line width
+
+            // Check each line of text and handle page overflow
+            splitText.forEach((line, lineIndex) => {
+                if (yOffset + 10 > pageHeight) {  // If the next line would go out of bounds
+                    doc.addPage();  // Add a new page
+                    yOffset = 20;  // Reset y position
                 }
                 doc.text(line, 10, yOffset);
                 yOffset += 10;  // Move to the next line position
@@ -129,7 +121,7 @@ function App() {
             yOffset += 10;  // Add space between notes
         });
 
-        doc.save('notes.pdf');  // Save the PDF with the included summary
+        doc.save('notes.pdf');  // Save the PDF with a default file name
     };
 
     const handleInput = () => {
@@ -145,8 +137,8 @@ function App() {
                   onChange={(e) => setInput(e.target.value)}
               />
               <button onClick={createNote}>Add Sticky</button>
-              <h2>Summary</h2>
-              {summary ? <p>{summary}</p> : <p>Nothing to Display</p>}
+              <h3>Summary</h3>
+              {summary ? <p>Output is: {summary}</p> : <p>Nothing to Display</p>}              <br></br>
               <br></br>
               <br></br>
               {/* <button onClick={sendMessage}>Send Message to Server</button>
@@ -155,7 +147,7 @@ function App() {
           <div>
               <h2>Your Notes</h2>
               {notes.map((note, index) => (
-                  <div key={index} className="note" style={{ wordBreak: 'break-word' }}>
+                  <div key={index} className="note">
                       <strong>{note.name}:</strong> {note.text}
                   </div>
               ))}
