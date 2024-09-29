@@ -82,6 +82,8 @@ function App() {
     const clearNotes = () => {
         setNotes([]);
         localStorage.removeItem('notes');
+        setSummary("");
+        localStorage.removeItem('summary');
     };
 
     const exportToPDF = () => {
