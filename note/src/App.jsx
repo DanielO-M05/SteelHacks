@@ -22,6 +22,34 @@ function App() {
     useEffect(() => {
         // Create WebSocket connection
         const socket = new WebSocket('ws://localhost:5173');
+    
+        // Set WebSocket instance
+        setWs(socket);
+    
+        // Listen for messages from the server
+        socket.onmessage = (event) => {
+            const newNote = JSON.parse(event.data);
+            setNotes((prevNotes) => [...prevNotes, newNote]);
+        };
+    
+        socket.onopen = () => {
+            console.log('Connected to the WebSocket server');
+        };
+    
+        socket.onclose = () => {
+            console.log('Disconnected from the WebSocket server');
+        };
+    
+        // Cleanup on component unmount
+        return () => {
+            socket.close();
+        };
+    }, []);
+
+/*
+    useEffect(() => {
+        // Create WebSocket connection
+        const socket = new WebSocket('ws://localhost:5173');
 
         // Set WebSocket instance
         setWs(socket);
@@ -43,7 +71,7 @@ function App() {
         return () => {
             socket.close();
         };
-    }, []);
+    }, []);*/
 
     const hasPromptedRef = useRef(false); // Create a ref to track if the prompt has been shown
 
@@ -84,6 +112,10 @@ function App() {
             setSummary(result.response.text());
             setNotes([...notes, newNote]);
             setInput('');
+
+            if (ws) {
+                ws.send(JSON.stringify(newNote));
+            }
         }
 
     };
