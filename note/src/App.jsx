@@ -1,3 +1,6 @@
+
+
+
 import jsPDF from 'jspdf';
 import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -18,7 +21,7 @@ function App() {
 
     useEffect(() => {
         // Create WebSocket connection
-        const socket = new WebSocket('ws://localhost:3000');
+        const socket = new WebSocket('ws://localhost:5173');
 
         // Set WebSocket instance
         setWs(socket);
