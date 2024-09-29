@@ -62,14 +62,25 @@ function App() {
         }
     };
 
-    const createNote = () => {
+    const createNote = async () => {
         if (input.trim() !== '') {
             const newNote = { name, text: input };
             setNotes([...notes, newNote]);
             setInput('');
         }
 
-        console.log("summary: " + model.generateContent(prompt));
+        try {
+            // Wait for the content to be generated
+            const result = await model.generateContent(prompt);
+            
+            // Access the text from the response
+            console.log(result.response.text());
+            
+            // Optionally, you can also set it in your state
+            setSummary(result.response.text());
+        } catch (error) {
+            console.error("Error generating content:", error);
+        }
 
     };
 
