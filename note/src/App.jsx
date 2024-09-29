@@ -69,7 +69,7 @@ function App() {
             setInput('');
         }
 
-        console.log("summary" + model.generateContent(prompt));
+        console.log("summary: " + model.generateContent(prompt));
 
     };
 
