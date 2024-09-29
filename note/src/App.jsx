@@ -1,3 +1,4 @@
+import jsPDF from 'jspdf';
 import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
@@ -73,6 +74,20 @@ function App() {
 
     };
 
+    // Function to export notes as a PDF
+    const exportToPDF = () => {
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text('Sticky Notes:', 10, 10);  // Add a title to the PDF
+
+        notes.forEach((note, index) => {
+            const noteText = `${note.name}: ${note.text}`;
+            doc.text(noteText, 10, 20 + index * 10);  // Add each note to the PDF
+        });
+
+        doc.save('notes.pdf');  // Save the PDF with a default file name
+    };
+
     const handleInput = () => {
         console.log("yippee");
     }
@@ -107,6 +122,9 @@ function App() {
                   </div>
               ))}
           </div>
+          <div>
+          <button onClick={exportToPDF}>Export Notes to PDF</button>
+        </div>
         </>
     );
 }
