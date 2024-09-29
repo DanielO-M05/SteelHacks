@@ -13,8 +13,8 @@ function App() {
     const [summary, setSummary] = useState('');
     const [notes, setNotes] = useState([]);
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = "Can you summarize these notes:";
  
