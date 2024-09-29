@@ -127,52 +127,66 @@ function App() {
         }
     };
 
-    // Function to export notes as a PDF
     const exportToPDF = () => {
         const doc = new jsPDF();
-        const pageHeight = doc.internal.pageSize.height;  // Get the height of the page
-        let yOffset = 20;  // Initial y-offset position
-
-        doc.setFontSize(16);
-
+        const pageHeight = doc.internal.pageSize.height; // Get the height of the page
+        let yOffset = 20; // Initial y-offset position
+        const margin = 10; // Define margin for better spacing
+        const lineHeight = 10; // Set line height for text
+    
+        // Title of the document
+        doc.setFontSize(20);
+        doc.setFont("helvetica", "bold");
+        doc.text('Notes Export', margin, yOffset);
+        yOffset += lineHeight * 2; // Add space after the title
+    
         // Include the summary at the top
-        doc.text('Summary:', 10, 10);
-        const summaryText = summary || "";  // Ensure `summary` is defined
-        const splitSummary = doc.splitTextToSize(summaryText, 180);  // Wrap summary text if too long
-
+        doc.setFontSize(16);
+        doc.setFont("helvetica", "bold");
+        doc.text('Summary:', margin, yOffset);
+        yOffset += lineHeight;
+    
+        doc.setFontSize(12); // Set a smaller font size for the content
+        const summaryText = summary || ""; // Ensure `summary` is defined
+        const splitSummary = doc.splitTextToSize(summaryText, doc.internal.pageSize.width - margin * 2); // Wrap summary text
+    
         splitSummary.forEach((line) => {
-            if (yOffset + 10 > pageHeight) {  // Check if the text would overflow
+            if (yOffset + lineHeight > pageHeight - margin) { // Check if the text would overflow
                 doc.addPage();
-                yOffset = 20;  // Reset y position on new page
+                yOffset = margin; // Reset y position on new page
             }
-            doc.text(line, 10, yOffset);  // Print each line of the summary
-            yOffset += 10;
+            doc.text(line, margin, yOffset); // Print each line of the summary
+            yOffset += lineHeight;
         });
-
-        yOffset += 10;  // Add space after the summary
-
-        doc.text('Sticky Notes:', 10, yOffset);  // Add a title for the notes
-        yOffset += 10;
-
+    
+        yOffset += lineHeight; // Add space after the summary
+    
+        // Add title for Sticky Notes
+        doc.setFontSize(16);
+        doc.setFont("helvetica", "bold");
+        doc.text('Sticky Notes:', margin, yOffset); // Add a title for the notes
+        yOffset += lineHeight;
+    
         // Include all notes in the PDF
+        doc.setFontSize(12); // Set a smaller font size for note content
         notes.forEach((note, index) => {
             const noteText = `${note.name}: ${note.text}`;
-            const splitText = doc.splitTextToSize(noteText, 180);  // Wrap note text
-
+            const splitText = doc.splitTextToSize(noteText, doc.internal.pageSize.width - margin * 2); // Wrap note text
+    
             splitText.forEach((line) => {
-                if (yOffset + 10 > pageHeight) {  // Check for page overflow
+                if (yOffset + lineHeight > pageHeight - margin) { // Check for page overflow
                     doc.addPage();
-                    yOffset = 20;  // Reset y position on new page
+                    yOffset = margin; // Reset y position on new page
                 }
-                doc.text(line, 10, yOffset);
-                yOffset += 10;  // Move to the next line position
+                doc.text(line, margin, yOffset);
+                yOffset += lineHeight; // Move to the next line position
             });
-
-            yOffset += 10;  // Add space between notes
+    
         });
-
-        doc.save('notes.pdf');  // Save the PDF with the included summary
+    
+        doc.save('notes.pdf'); // Save the PDF with the included summary
     };
+    
 
     return (
         <>
