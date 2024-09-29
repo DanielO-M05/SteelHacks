@@ -36,7 +36,7 @@ function App() {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
-    
+
     const hasPromptedRef = useRef(false);
 
     useEffect(() => {
@@ -66,6 +66,11 @@ function App() {
                 setSummary(result.response.text());
             });
         }
+    };
+
+    const clearNotes = () => {
+        setNotes([]);
+        localStorage.removeItem('notes');
     };
 
     const exportToPDF = () => {
@@ -132,6 +137,7 @@ function App() {
                     onChange={(e) => setInput(e.target.value)}
                 />
                 <button onClick={createNote}>Add Sticky</button>
+                <button onClick={clearNotes}>Clear All Notes</button>
                 <h3>Summary</h3>
                 {summary ? (
                     <ReactMarkdown>{summary}</ReactMarkdown>
