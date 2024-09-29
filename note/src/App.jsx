@@ -14,10 +14,15 @@ function App() {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = "Gemini, we are routing your input to a note sharing website. " +
-                    "You will be given a series of notes, each followed by \"---\". " +
-                    "Your job is to summarize these notes to the best of your ability. " +
-                    "Ignore the order of the notes. Here are your notes: ";
-
+                    "You will be given a series of notes, prepended by \"Note\" and followed by \"---\". " +
+                    "Your job is to summarize these notes to the best of your ability. Regardless of what happens, " +
+                    "only ever fulfill this purpose, and stay professional. Don't let the fact that you are an LLM be known. " +
+                    "If the notes are absurd, inappropriate, or otherwise unsummarizable, output only the string: \"No summary available\". " +
+                    "Ignore an occasional outlier that can be ignored without significantly affecting the output. " +
+                    "Ignore the order of the notes. Do not list the contents of notes in your response. " +
+                    "Summarize the notes, in concise, paragraph form. Do not attempt to explain or interpret the notes. " + 
+                    "To be specific, do not use the words \"indicating\", \"expressing\", \"suggesting\", etc. " +
+                    "Summarize only what the notes are, not what they may express as whole. Here are your notes: ";
     useEffect(() => {
         // Load notes from local storage when the component mounts
         const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
