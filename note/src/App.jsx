@@ -181,7 +181,7 @@ function App() {
               />
               <button onClick={createNote}>Add Sticky</button>
               <h3>Summary</h3>
-              {summary ? <p>Output is: {summary}</p> : <p>Nothing to Display</p>}              <br></br>
+              {summary ? <p>{summary}</p> : <p>Nothing to Display</p>}              <br></br>
               <br></br>
               <br></br>
               {/* <button onClick={sendMessage}>Send Message to Server</button>

@@ -34,8 +34,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin: 10px auto; /* Center the button horizontally */
-  display: block; /* Make the button take up full width and allow centering */
+  margin: 10px auto;
+  display: block;
 }
 
 button:hover {
