@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-
-
+import { defineConfig, loadEnv } from 'vite';
 
 function App() {
   const [response, setResponse] = useState('');
@@ -11,12 +10,26 @@ function App() {
   const [summary, setSummary] = useState('');
   const [notes, setNotes] = useState([]);
 
+  import { defineConfig, loadEnv } from 'vite'
+
+  export default defineConfig(({ command, mode }) => {
+      // Load env file based on `mode` in the current working directory.
+      // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+      const env = loadEnv(mode, process.cwd(), '')
+      return {
+          // vite config
+          define: {
+              __APP_ENV__: JSON.stringify(env.APP_ENV),
+          },
+      }
+  })
+
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+  consolse.log(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = "Write a story about a magic backpack.";
-  //setSummary(model.generateContent(prompt));
-
+  setSummary(model.generateContent(prompt));
 
     useEffect(() => {
         // Create WebSocket connection
